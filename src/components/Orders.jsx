@@ -31,7 +31,7 @@ const getPrice = (name) => MENU_PRICES[name] || 0;
 const Orders = () => {
   const [tab, setTab] = useState("past");
   const [orders, setOrders] = useState([]);
-  const [supportChats, setSupportChats] = useState({});
+  //const [supportChats, setSupportChats] = useState({});
 
   /* 🔥 NEW STATES (ADDED ONLY) */
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -64,9 +64,7 @@ const Orders = () => {
         }))
       );
 
-      setSupportChats(
-        JSON.parse(localStorage.getItem("supportChats")) || {}
-      );
+     
     };
 
     loadOrders();

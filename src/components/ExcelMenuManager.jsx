@@ -46,11 +46,10 @@ export default function ExcelMenuManager({
   });
 
   useEffect(() => {
-  fetchMenu();
-}, [fetchMenu]);
+    fetchMenu();
+  }, []);
 
-
-  const fetchMenu = useCallback(async () => {
+async function fetchMenu() {
   try {
     setLoading(true);
     const res = await fetch(apiBase, {
@@ -64,7 +63,12 @@ export default function ExcelMenuManager({
   } finally {
     setLoading(false);
   }
-}, [apiBase, token]);
+}
+
+useEffect(() => {
+  fetchMenu();
+}, []);
+
 
   // Inline create/update
   async function saveItem(item, isNew = false) {

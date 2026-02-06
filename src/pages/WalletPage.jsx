@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import "../styles/wallet.css";
 
 const WalletPage = () => {
-  const navigate = useNavigate();
+
 
   const [balance, setBalance] = useState(
     Number(localStorage.getItem("walletBalance")) || 0
