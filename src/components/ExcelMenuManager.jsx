@@ -1,5 +1,5 @@
 // ExcelMenuManager.jsx
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import * as XLSX from "xlsx";
 import { useMenuSocket } from "./useMenuSocket";
@@ -45,9 +45,10 @@ export default function ExcelMenuManager({
     }
   });
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+ useEffect(() => {
+  fetchMenu();
+}, [fetchMenu]);
+
 
 async function fetchMenu() {
   try {
@@ -67,7 +68,8 @@ async function fetchMenu() {
 
 useEffect(() => {
   fetchMenu();
-}, []);
+}, [fetchMenu]);
+
 
 
   // Inline create/update
