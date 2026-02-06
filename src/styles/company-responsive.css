@@ -1,0 +1,53 @@
+/* ========== GLOBAL RESET ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100dvh;
+  font-family: system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* MEDIA */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* CONTAINER */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding: clamp(12px, 3vw, 24px);
+}
+
+/* HEIGHT */
+.full-height {
+  min-height: 100dvh;
+}
+
+/* FLEX */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* TYPOGRAPHY */
+h1 { font-size: clamp(24px, 4vw, 42px); }
+p  { font-size: clamp(14px, 2vw, 18px); }
+
+/* BUTTON BASE */
+button {
+  min-height: 44px;
+  font-size: 1rem;
+}

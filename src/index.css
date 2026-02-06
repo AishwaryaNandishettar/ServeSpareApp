@@ -1,0 +1,121 @@
+/* ---------------------------------------------------------- */
+/*                     GLOBAL DEFAULT RESET                   */
+/* ---------------------------------------------------------- */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important; /* removes horizontal scrollbar */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/* Prevent any child from causing horizontal scroll */
+* {
+  box-sizing: border-box;
+}
+
+/* Root container (applies to entire app) */
+#root, .app-container {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  /* 🔥 CRITICAL FIX */
+  align-items: stretch;
+
+  overflow-x: hidden;
+}
+
+
+/* Prevent inner components from overflowing the screen */
+.app-container > * {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Code Tag (your existing styling) */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ---------------------------------------------------------- */
+/*                   GLOBAL RESPONSIVE SYSTEM                 */
+/* ---------------------------------------------------------- */
+
+/* Global wrapper for pages (optional) */
+.page-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 16px;
+  margin: 0 auto;
+}
+
+/* ---------------- MOBILE SMALL (Android, iPhone SE) ---------------- */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  .page-container {
+    padding: 10px;
+  }
+}
+
+/* ---------------- MOBILE LARGE (6–7 inch phones) ---------------- */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+  .page-container {
+    padding: 12px;
+  }
+}
+
+/* ---------------- TABLETS / iPad ---------------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+  .page-container {
+    padding: 18px;
+  }
+}
+
+/* ---------------- LAPTOPS (13–15 inch) ---------------- */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  body {
+    font-size: 17px;
+  }
+  .page-container {
+    padding: 20px;
+  }
+}
+
+/* ---------------- DESKTOP / LARGE MONITORS ---------------- */
+@media (min-width: 1367px) {
+  body {
+    font-size: 18px;
+  }
+  .page-container {
+    padding: 24px;
+  }
+}
+
+html, body, #root {
+  height: 100%;
+  background: #ffffff;
+}
+
+.app-container {
+  min-height: 100%;
+}

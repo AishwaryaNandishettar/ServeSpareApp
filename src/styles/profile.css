@@ -1,0 +1,270 @@
+/* ===============================
+   RESET
+   =============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   GLOBAL FONT
+   =============================== */
+html,
+body,
+div,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+select,
+textarea {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* ===============================
+   LAYOUT
+   =============================== */
+html,
+body {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-container {
+  background: linear-gradient(135deg, #cadfff, #f0f6ff);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  padding: 20px;
+}
+
+/* ===============================
+   HEADER
+   =============================== */
+.header5 {
+  background: linear-gradient(135deg, #052370, #224da2, #6fa8ff);
+  padding: 35px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  font-weight: 600;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.back-btn {
+  position: absolute;
+  left: 16px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* ===============================
+   PROFILE SECTION
+   =============================== */
+.profile-section {
+  padding: 25px;
+  border-bottom: 1px solid #e6ecf7;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 100px;
+}
+
+.profile-left h3 {
+  font-size: 20px;
+  color: #010c20;
+}
+
+.profile-left p {
+  font-size: 14px;
+  color: #010c20;
+}
+
+/* ===============================
+   PHOTO
+   =============================== */
+.photo-circle {
+  width: 75px;
+  height: 75px;
+  background: #f5f8ff;
+  border-radius: 50%;
+  border: 1px solid #010c20;
+  font-size: 11px;
+  font-weight: 600;
+  color: #010c20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.add-photo {
+  margin-left: auto;
+}
+
+
+/* ===============================
+   MENU LIST – CARD STYLE
+   =============================== */
+.menu-list {
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+  margin: 0;          /* ⬅ remove side offset */
+  padding: 0 3px;    /* ⬅ match profile-section horizontal padding */
+  background: transparent;
+  box-shadow: none;
+}
+
+
+.menu-item {
+  background: #ffffff;
+  width:auto;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 16px 18px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.menu-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ===============================
+   LOGOUT SHEET
+   =============================== */
+.logout-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 100;
+}
+
+.logout-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  background: #ffffff;
+
+  border-radius: 16px 16px 0 0;
+  padding: 12px;
+
+  z-index: 101;
+}
+
+.logout-option {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #ffffff;
+
+  font-size: 15px;
+  cursor: pointer;
+
+  border-top: 1px solid #e6ecf7;
+}
+
+.logout-option.danger {
+  color: #dc2626;
+}
+
+.logout-option.cancel {
+  margin-top: 8px;
+  color: #1f4fa3;
+}
+
+/* ===============================
+   DESKTOP ALIGNMENT FIX (ONLY)
+   =============================== */
+@media (min-width: 1500px) {
+
+  /* Allow sections to use full width */
+  .profile-section {
+    width: 100%;
+    max-width: 1800px;
+  }
+
+  /* Fix profile alignment (match first image) */
+  .profile-section {
+    text-align: left;
+  }
+
+  .profile-info {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Keep profile text left */
+  .profile-left {
+    text-align: left;
+  }
+
+  /* Push photo to extreme right */
+  .add-photo {
+    margin-left: auto;
+  }
+}
+
+/* ===============================
+   HIDE SCROLLBAR (BUT SCROLLABLE)
+   =============================== */
+.menu-list {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.menu-list::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari */
+}

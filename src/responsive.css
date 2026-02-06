@@ -1,0 +1,84 @@
+/* =====================================================
+   COMPANY RESPONSIVE DIMENSIONS SYSTEM
+===================================================== */
+
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: system-ui, sans-serif;
+}
+
+/* CONTAINER SYSTEM */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px;
+}
+.full-height {
+  min-height: 100dvh;
+}
+
+/* TYPOGRAPHY */
+h1 { font-size: clamp(24px, 4vw, 42px); }
+h2 { font-size: clamp(20px, 3vw, 32px); }
+p  { font-size: clamp(14px, 2vw, 18px); }
+
+/* BUTTONS */
+button {
+  min-height: 44px;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* FLEX HELPERS */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ================== BREAKPOINTS ================== */
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .hide-mobile { display: none; }
+}
+
+/* TABLET */
+@media (min-width: 769px) {
+  .container {
+    max-width: 960px;
+    padding: 24px;
+  }
+}
+
+/* LAPTOP */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1367px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+

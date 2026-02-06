@@ -1,0 +1,751 @@
+  /* GLOBAL RESET */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  html,
+  body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #052370, #0d2e6e, #6fa8ff);
+    overflow-y: auto;
+  }
+
+  /* MAIN CONTAINER */
+  .container5 {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #b1d0ff, #e2eeff);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: linear-gradient(135deg, #052370, #0d2e6e, #6fa8ff);
+    border-radius: 6px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+  }
+
+  .logo-circle {
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    color: #1f4fd8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-right {
+  display: flex;
+  align-items: center;   /* ✅ key line */
+  gap: 8px;
+}
+
+
+  .header-icon {
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+  .brand-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.brand-line-1 {
+  font-size: 13px;
+}
+
+.brand-line-2 {
+  font-size: 13px;
+}
+
+
+  /* WELCOME */
+  .welcome-banner {
+    margin-top: 6px;
+    padding-bottom: 14px;
+    border-radius: 12px;
+    background-image: url("../assets/Banner.webp");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+  }
+
+  .welcome-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 12px;
+  }
+
+  .welcome-text {
+    position: relative;
+  }
+
+/* TABS (BASE) */
+.quick-tab {
+  margin-top: 8px;
+  display: flex;
+  background: #f8faff;
+  border-radius: 5px;
+  overflow: hidden;   /* desktop clean */
+}
+
+.quick-tab .tab {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  background: transparent;
+  color: #4b5563;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.quick-tab .tab.active1 {
+  background: #123373;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+
+
+  /* SEARCH */
+  .floating-search input {
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 14px;
+    border: 1px solid #c7d7f5;
+  }
+
+  /* ===========================
+    CIRCULAR FOOD ICON GRID
+  =========================== */
+
+  .food-category-cards {
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+  }
+
+  .food-card-new {
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 0.6s forwards;
+  }
+
+  .food-card-new img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 6px;
+  }
+
+  .food-name {
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #123373;
+    text-align: center;
+  }
+
+  /* CTA */
+  .container1 {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .welcome-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(135deg, #052370, #0d2e6e, #6fa8ff);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .food-category-cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .food-card-new img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  /* ===========================
+   SCROLLABLE TABS (SMALL SCREENS)
+=========================== */
+@media (max-width: 480px) {
+  .quick-tab {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;        /* Firefox */
+  }
+
+  .quick-tab::-webkit-scrollbar {
+    display: none;                /* Chrome / Safari */
+  }
+
+  .quick-tab .tab {
+    flex: 0 0 auto;               /* 🔑 stop shrinking */
+    min-width: 90px;              /* swipeable width */
+    height: 34px;
+    font-size: 11px;
+    padding: 0 14px;
+  }
+}
+
+
+  @media (max-width: 768px) {
+  .tab {
+    font-size: 12px;         /* smaller on mobile */
+    font-weight: 500;
+    height: 34px;
+  }
+}
+
+
+  @media (max-width: 420px) {
+    .food-category-cards {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .food-card-new img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .food-name {
+      margin-top: 2px;
+      font-size: 12px;
+    }
+  }
+
+  /* ANIMATION */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+ /* ===========================
+   ZOMATO SYMBOL STYLE TOGGLE
+=========================== */
+
+.food-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  max-height: 140px;           /* ✅ enables vertical scroll */
+  overflow-y: auto;
+  padding-right: 6px;
+
+  margin-left: 12px;
+}
+
+/* Hide scrollbar (clean Zomato look) */
+.food-toggle::-webkit-scrollbar {
+  width: 4px;
+}
+.food-toggle::-webkit-scrollbar-thumb {
+  background: #cbd5f5;
+  border-radius: 10px;
+}
+
+/* Symbol box */
+.food-symbol {
+  width: 50px;
+  height: 50px;
+
+  background: #ffffff;
+  border-radius: 50%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  font-size: 22px;
+  cursor: pointer;
+  font-weight: 700;
+
+  border: 2px solid #d1d5db;
+  transition: all 0.2s ease;
+}
+
+/* Label */
+.food-symbol span {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* VEG */
+.food-symbol.veg {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+.food-symbol.veg.active {
+  background: #ecfdf5;
+}
+
+/* NON-VEG */
+.food-symbol.nonveg {
+  color: #dc2626;
+  border-color: #dc2626;
+}
+.food-symbol.nonveg.active {
+  background: #fff5f5;
+}
+
+/* EGG */
+.food-symbol.egg {
+  color: #facc15;
+  border-color: #facc15;
+}
+.food-symbol.egg.active {
+  background: #fffbea;
+}
+
+/* Hover effect */
+.food-symbol:hover {
+  transform: scale(1.05);
+}
+
+/* Hide on small screens (optional) */
+@media (max-width: 768px) {
+  .food-toggle {
+    display: none;
+  }
+}
+
+/* ===========================
+   HEADER FOOD TYPE TOGGLE
+=========================== */
+
+.food-toggle-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.food-symbol-inline {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.food-symbol-inline::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* VEG */
+.food-symbol-inline.veg {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+/* EGG */
+.food-symbol-inline.egg {
+  color: #facc15;
+  border-color: #facc15;
+}
+
+/* NON-VEG */
+.food-symbol-inline.nonveg {
+  color: #dc2626;
+  border-color: #dc2626;
+}
+
+.food-symbol-inline.active {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ===========================
+   VERTICAL HEADER FOOD TOGGLE
+=========================== */
+
+.food-toggle-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 8px;
+}
+
+/* Square symbol */
+.food-symbol-inline {
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+/* Center dot */
+.food-symbol-inline::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Veg */
+.food-symbol-inline.veg {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+/* Egg */
+.food-symbol-inline.egg {
+  color: #facc15;
+  border-color: #facc15;
+}
+
+/* Non-veg */
+.food-symbol-inline.nonveg {
+  color: #dc2626;
+  border-color: #dc2626;
+}
+
+/* Active feedback */
+.food-symbol-inline.active {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);
+}
+
+/* ===========================
+   FOOD → CANTEEN PRICE LIST
+=========================== */
+
+.food-canteen-list {
+  margin-top: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.food-canteen-list h3 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #123373;
+}
+
+.canteen-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eef2ff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.canteen-price-row:last-child {
+  border-bottom: none;
+}
+
+.canteen-price-row:hover {
+  background: #f5f8ff;
+}
+
+.canteen-price-row .price {
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-box {
+  background: #ffffff;
+  width: 420px;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.canteen-price-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  margin-top: 10px;
+  background: #f4f6ff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.canteen-price-row:hover {
+  background: #e1e7ff;
+}
+
+.close-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #052370;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===========================
+   HEADER TOGGLE WITH TEXT
+=========================== */
+
+.food-toggle-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.food-toggle-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+  user-select: none;
+}
+
+/* Slight emphasis when active */
+.food-toggle-item.active .food-toggle-text {
+  font-weight: 700;
+}
+
+/* ===========================
+   SPACING REDUCTION (SAFE)
+=========================== */
+
+/* Reduce space below header / welcome */
+.welcome-banner {
+  margin-top: 2px;   /* was 6px */
+  padding: 30px;     /* slightly tighter */
+}
+
+/* Reduce gap before tabs */
+.quick-tab {
+  margin-top: 5px;   /* was 8px */
+}
+
+/* Reduce gap before food icons */
+.food-category-cards {
+  margin-top: 2px;   /* was 5px */
+}
+
+/* ===========================
+   FOOD TYPE DROPDOWN (HEADER)
+=========================== */
+
+.food-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Trigger (icon next to search & profile) */
+.food-dropdown-trigger {
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Dropdown menu */
+.food-dropdown-menu {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  display: none;
+  min-width: 130px;
+  z-index: 999;
+}
+
+/* Show on hover */
+.food-dropdown:hover .food-dropdown-menu {
+  display: block;
+}
+
+/* Dropdown item */
+.food-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #123373;
+}
+
+.food-dropdown-item:hover {
+  background: #f4f6ff;
+}
+
+/* REMOVE THIS */
+.food-dropdown:hover .food-dropdown-menu {
+  display: block;
+}
+
+/* ===========================
+   DROPDOWN ANIMATION
+=========================== */
+
+.food-dropdown-menu {
+  opacity: 0;
+  transform: translateY(-6px) scale(0.95);
+  animation: dropdownFade 0.18s ease-out forwards;
+  transform-origin: top right;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===========================
+   VEG DROPDOWN (SAME AS CANTEEN)
+=========================== */
+
+.veg-filter-wrapper {
+  position: relative;
+}
+
+.veg-icon {
+  display: flex;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.veg-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  overflow: hidden;
+  z-index: 999;
+  min-width: 120px;
+}
+
+.veg-dropdown div {
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #123373;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.veg-dropdown div:hover {
+  background: #f0f4ff;
+}
+
+
+

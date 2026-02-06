@@ -1,0 +1,206 @@
+/* ========================= */
+/* RESET */
+/* ========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* ========================= */
+/* PAGE */
+/* ========================= */
+.cart-page {
+  min-height: 100vh;
+  background: #eaf3ff;
+  display: flex;
+  justify-content: center;
+}
+
+/* ========================= */
+/* 📱 MOBILE FIRST */
+/* ========================= */
+.app-container {
+  width: 100%;
+  max-width: 390px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a8cbff, #eaf3ff);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+.cart-header {
+  background: linear-gradient(135deg, #052370, #6fa8ff);
+  padding: 16px;
+  color: white;
+
+  /* 👇 MATCH ITEM CARD WIDTH */
+  margin: 16px;
+  border-radius: 8px;
+
+  /* 👇 CENTER TEXT */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.cart-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/* ========================= */
+/* CONTENT WRAPPER */
+/* ========================= */
+.cart-content {
+  padding: 16px;
+  flex: 1;
+}
+
+/* ========================= */
+/* CART ITEM */
+/* ========================= */
+.cart-item {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ========================= */
+/* ITEM INFO */
+/* ========================= */
+.item-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.item-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.item-info p {
+  font-size: 13px;
+  color: #555;
+}
+
+/* ========================= */
+/* QTY PILL */
+/* ========================= */
+.qty-pill {
+  display: flex;
+  align-items: center;
+  background: #123373;
+  color: white;
+  border-radius: 6px;
+  height: 28px;
+}
+
+.qty-pill button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.qty-pill span {
+  font-size: 13px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* ========================= */
+/* COUPON */
+/* ========================= */
+.coupon {
+  margin: 14px 0;
+  padding: 12px;
+  background: #f6f6f6;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ========================= */
+/* TOTAL */
+/* ========================= */
+.total-box {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 90px; /* space for fixed pay button */
+}
+
+/* ========================= */
+/* PAY BUTTON (MOBILE) */
+/* ========================= */
+.pay-btn {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 358px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #123373;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ================================================= */
+/* 💻 DESKTOP — FULL WIDTH, NO CENTERING */
+/* ================================================= */
+@media (min-width: 768px) {
+
+  .cart-page {
+    justify-content: flex-start;
+    padding: 24px 48px;
+  }
+
+  .app-container {
+    max-width: 100%;
+    min-height: auto;
+  }
+
+  .cart-content {
+    max-width: 720px;
+  }
+
+  .pay-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin-top: 20px;
+  }
+
+  .total-box {
+    margin-bottom: 12px;
+  }
+}

@@ -1,0 +1,108 @@
+.invoice-container {
+  background: #f2f4f7;
+  height: 100vh;
+  overflow-y: auto;        /* ✅ PAGE SCROLL */
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.invoice-card {
+  /* background: #fff; */
+  width: 900px;
+  border-radius: 6px;
+
+  /* ❌ overflow: hidden;  <-- REMOVED (THIS WAS BREAKING QR) */
+}
+
+
+/* HEADER */
+.invoice-header {
+  background: #0b5fa5;
+  color: #fff;
+  padding: 20px 30px;
+}
+
+.invoice-header h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+/* INFO GRID */
+.info-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: 30px;
+  padding: 25px 30px;
+  border-bottom: 3px solid #ddd;
+}
+
+.label {
+  font-size: 12px;
+  color: #888;
+  margin-top: 10px;
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.amount-highlight {
+  text-align: right;
+}
+
+.big-amount {
+  font-size: 30px;
+  font-weight: bold;
+  color: #0b5fa5;
+}
+
+/* TABLE */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-table th {
+  /* background: #f5f7fa; */
+  padding: 12px 30px;
+  text-align: left;
+}
+
+.invoice-table td {
+  padding: 12px 30px;
+  border-bottom: 1px solid #eee;
+}
+
+/* SUMMARY */
+.summary {
+  max-width: 350px;
+  margin-left: 440px;
+  padding: 20px 30px;
+}
+
+.summary div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.summary .final {
+  font-weight: bold;
+  border-top: 2px solid #000;
+  padding-top: 10px;
+}
+
+/* QR */
+.qr-wrapper {
+  text-align: center;
+  padding: 40px 30px; /* extra breathing room */
+}
+
+.qr-wrapper p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}

@@ -1,0 +1,162 @@
+.tracking-container {
+  background: #f2f2f2;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.tracking-header {
+  background: #2e9f43;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.status-text {
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+.arrival {
+  background: rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+/* INFO */
+.info-strip {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: white;
+  font-size: 14px;
+}
+
+.info-strip button {
+  border: none;
+  background: none;
+  color: #e23744;
+  font-weight: bold;
+}
+
+/* ACTIONS */
+.tracking-actions {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px;
+}
+
+.tracking-actions button {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+}
+
+.primary {
+  background: #2e9f43;
+  color: white;
+}
+
+.danger {
+  background: #e23744;
+  color: white;
+}
+
+.danger:disabled {
+  background: #ccc;
+}
+
+.support {
+  background: #333;
+  color: white;
+}
+
+.cancel-info {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+}
+
+/* QR */
+.qr-box {
+  background: white;
+  margin: 15px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* CHAT */
+.chat-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-body {
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 10px 0;
+}
+
+.chat-msg {
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.chat-msg.user {
+  background: #d1f0ff;
+  align-self: flex-end;
+}
+
+.chat-msg.vendor {
+  background: #eee;
+}
+
+.chat-input {
+  display: flex;
+  gap: 6px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+}
+
+.chat-input button {
+  background: #2e9f43;
+  color: white;
+  border: none;
+}
+
+.tracking-empty {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}

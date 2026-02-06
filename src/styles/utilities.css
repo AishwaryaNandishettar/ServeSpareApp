@@ -1,0 +1,17 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-lg {
+  margin-top: 32px;
+}

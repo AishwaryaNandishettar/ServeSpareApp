@@ -1,0 +1,139 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f7f8fc;
+  margin: 0;
+  padding: 0;
+}
+
+.payment-container {
+  height: 640px;
+  width: 360px;
+  /* max-width: 420px; */
+  margin: 10px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 10px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+.section h3 {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f1f1f7;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.option img {
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
+}
+
+.option:hover {
+  background: #e2e2f1;
+}
+
+.details {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 12px;
+  background: #f9f9ff;
+  border-radius: 10px;
+}
+
+.details input, .details select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+}
+
+.details button {
+  background: #4a6cf7;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.details button:hover {
+  background: #2f4ef0;
+}
+
+/* ===== CARD STYLE (IMAGE MATCH) ===== */
+
+.card-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f6f6fb;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.add-text {
+  color: red;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.expiry-label {
+  font-size: 13px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.expiry-row {
+  display: flex;
+  gap: 10px;
+}
+
+.expiry-row select {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.save-btn {
+  margin-top: 12px;
+  background: #3b0078;
+  padding: 14px;
+  border-radius: 30px;
+  font-size: 16px;
+}

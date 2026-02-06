@@ -1,0 +1,267 @@
+/* ===========================
+   GLOBAL RESET
+=========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg,#052370,#6fa8ff);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ===========================
+   MAIN CONTAINER
+=========================== */
+.container5 {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  background: linear-gradient(135deg,#b1d0ff,#e2eeff);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+.navbar {
+  background: linear-gradient(135deg,#052370,#6fa8ff);
+  padding: 14px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.header-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* ===========================
+   VEG DROPDOWN
+=========================== */
+.veg-filter-wrapper {
+  position: relative;
+}
+
+.veg-icon {
+  display: flex;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.veg-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  overflow: hidden;
+  z-index: 10;
+  min-width: 120px;
+}
+
+.veg-dropdown div {
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #123373;
+}
+
+.veg-dropdown div:hover {
+  background: #f0f4ff;
+}
+
+/* ===========================
+   CART BADGE
+=========================== */
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ffffff;
+  color: #000;
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===========================
+   FOOD GRID
+=========================== */
+.foods-category-card {
+  width: 100%;
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+/* ===========================
+   FOOD CARD
+=========================== */
+.foods-card-new {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.foods-card-new img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.foods-card-info {
+  color: #123373;
+  padding: 14px;
+}
+
+.foods-card-info h4 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.foods-desc {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.foods-card-btn {
+  width: 100%;
+  height: 38px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  background: #123373;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+@media (max-width: 768px) {
+  .foods-category-card {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+@media (max-width: 420px) {
+  .foods-category-card {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .foods-card-new {
+    flex-direction: row;
+    padding: 6px;
+    gap: 4px;
+  }
+
+  .foods-card-new img {
+    width: 90px;
+    height: 105px;
+    border-radius: 10px;
+  }
+
+  .foods-card-info {
+    padding: 0;
+    flex: 1;
+  }
+
+  .foods-desc {
+    font-size: 10px;
+  }
+
+  .foods-card-btn {
+    height: 30px;
+    font-size: 12px;
+  }
+}
+
+/* ===== VEG DROPDOWN ICON ROW ===== */
+.veg-dropdown div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== QTY BOX (keeps same look) ===== */
+.qty-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #123373;
+  color: #fff;
+  border-radius: 8px;
+  height: 38px;
+  padding: 0 10px;
+  font-weight: 600;
+}
+
+.qty-box button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ===== VEG TYPE COLORS (ICON ONLY) ===== */
+.veg-item svg {
+  font-size: 16px;
+}
+
+.veg-item.veg svg {
+  color: #2ecc71; /* green */
+}
+
+.veg-item.nonveg svg {
+  color: #e74c3c; /* red */
+}
+
+.veg-item.egg svg {
+  color: #f1c40f; /* yellow */
+}
+
