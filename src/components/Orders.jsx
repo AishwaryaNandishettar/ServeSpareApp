@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Orders.css";
 import { useNavigate } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
 
 /* 🔒 MENU PRICE MAP (UNCHANGED) */
 const MENU_PRICES = {
@@ -26,12 +27,37 @@ const CANCEL_REASONS = [
 
 const getPrice = (name) => MENU_PRICES[name] || 0;
 
+/* ✅ SAFE DATE + TIME PARSER (UNCHANGED) */
+const parseOrderDateTime = (dateStr, timeStr) => {
+  if (!dateStr || !timeStr) return null;
 
+  const [day, month, year] = dateStr.split("/").map(Number);
+  let hours = 0;
+  let minutes = 0;
+
+  if (
+    timeStr.toLowerCase().includes("am") ||
+    timeStr.toLowerCase().includes("pm")
+  ) {
+    const [time, modifier] = timeStr.split(" ");
+    let [h, m] = time.split(":").map(Number);
+
+    if (modifier.toLowerCase() === "pm" && h !== 12) h += 12;
+    if (modifier.toLowerCase() === "am" && h === 12) h = 0;
+
+    hours = h;
+    minutes = m;
+  } else {
+    [hours, minutes] = timeStr.split(":").map(Number);
+  }
+
+  return new Date(year, month - 1, day, hours, minutes);
+};
 
 const Orders = () => {
   const [tab, setTab] = useState("past");
   const [orders, setOrders] = useState([]);
-  //const [supportChats, setSupportChats] = useState({});
+  const [supportChats, setSupportChats] = useState({});
 
   /* 🔥 NEW STATES (ADDED ONLY) */
   const [showCancelModal, setShowCancelModal] = useState(false);
@@ -64,7 +90,9 @@ const Orders = () => {
         }))
       );
 
-     
+      setSupportChats(
+        JSON.parse(localStorage.getItem("supportChats")) || {}
+      );
     };
 
     loadOrders();
@@ -108,7 +136,7 @@ const Orders = () => {
     navigate("/cart");
   };
 
-  /* ❌ UPDATED CANCEL HANDLER (LOGIC PRESERVED + RULES ADDED) */
+  /* ❌ CANCEL HANDLER (UNCHANGED LOGIC) */
   const handleCancel = (orderId) => {
     const monitorOrders =
       JSON.parse(localStorage.getItem("monitorOrders")) || [];
@@ -167,12 +195,22 @@ const Orders = () => {
 
   return (
     <div className="orders-page">
+      {/* ===== HEADER WITH BACK ARROW ===== */}
       <div className="orders-header">
+        <span
+          className="orders-back-btn"
+          onClick={() => navigate(-1)}
+          title="Back"
+        >
+          <FiArrowLeft />
+        </span>
+
         <h2>Orders</h2>
       </div>
 
       {errorMsg && <div className="cancel-error">{errorMsg}</div>}
 
+      {/* ===== TABS ===== */}
       <div className="orders-tabs">
         <button
           className={tab === "active" ? "tab active" : "tab"}
@@ -188,6 +226,7 @@ const Orders = () => {
         </button>
       </div>
 
+      {/* ===== ORDERS LIST ===== */}
       <div className="orders-list">
         {visibleOrders.map((o) => (
           <div className="order-card" key={o.id}>
@@ -227,7 +266,7 @@ const Orders = () => {
         ))}
       </div>
 
-      {/* 🔥 CANCEL REASON MODAL */}
+      {/* ===== CANCEL MODAL ===== */}
       {showCancelModal && (
         <div className="modal-overlay">
           <div className="modal-box">
@@ -247,25 +286,17 @@ const Orders = () => {
             ))}
 
             <div className="modal-actions">
-  <button
-    onClick={() => {
-      setShowCancelModal(false);
-      setCancelReason("");
-      setSelectedOrderId(null);
-    }}
-  >
-    Close
-  </button>
-
-  <button
-    className="Confirm-btn"
-    disabled={!cancelReason}
-    onClick={confirmCancel}
-  >
-    Confirm Cancel
-  </button>
-</div>
-
+              <button onClick={() => setShowCancelModal(false)}>
+                Close
+              </button>
+              <button
+                className="Confirm-btn"
+                disabled={!cancelReason}
+                onClick={confirmCancel}
+              >
+                Confirm Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}

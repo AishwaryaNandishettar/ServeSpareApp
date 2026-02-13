@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
 import "../styles/wallet.css";
 
 const WalletPage = () => {
-
+  const navigate = useNavigate();
 
   const [balance, setBalance] = useState(
     Number(localStorage.getItem("walletBalance")) || 0
@@ -24,7 +25,6 @@ const WalletPage = () => {
     cvv: "",
   });
 
-  /* ---------------- ADD BALANCE (UNCHANGED) ---------------- */
   const addBalance = () => {
     const numAmount = Number(amount);
     if (!amount || isNaN(numAmount) || numAmount <= 0) {
@@ -53,7 +53,6 @@ const WalletPage = () => {
     setMethod(null);
   };
 
-  /* ---------------- WITHDRAW BALANCE (NEW) ---------------- */
   const withdrawBalance = () => {
     const numAmount = Number(withdrawAmount);
 
@@ -84,7 +83,6 @@ const WalletPage = () => {
     setBankAccount("");
   };
 
-  /* ---------------- KEEP EXISTING EFFECT ---------------- */
   useEffect(() => {
     const allowed = balance >= 500;
     localStorage.setItem("canOrder", allowed ? "true" : "false");
@@ -93,6 +91,15 @@ const WalletPage = () => {
   return (
     <div className="wallet-container">
       <header className="wallet-header">
+        {/* ✅ Back Arrow (left) */}
+        <span
+          className="wallet-back-btn"
+          onClick={() => navigate(-1)}
+          title="Back"
+        >
+          <FiArrowLeft />
+        </span>
+
         <h3>Servespare Wallet</h3>
       </header>
 
@@ -102,10 +109,7 @@ const WalletPage = () => {
       </div>
 
       {minAmountError && (
-        <p
-          className="balance-label"
-          style={{ marginLeft: "16px", color: "red" }}
-        >
+        <p className="balance-label" style={{ marginLeft: "16px", color: "red" }}>
           {minAmountError}
         </p>
       )}
@@ -145,42 +149,30 @@ const WalletPage = () => {
             <input
               className="wallet-input"
               placeholder="Card Number"
-              onChange={(e) =>
-                setCard({ ...card, number: e.target.value })
-              }
+              onChange={(e) => setCard({ ...card, number: e.target.value })}
             />
             <input
               className="wallet-input"
               placeholder="Name"
-              onChange={(e) =>
-                setCard({ ...card, name: e.target.value })
-              }
+              onChange={(e) => setCard({ ...card, name: e.target.value })}
             />
             <input
               className="wallet-input"
               placeholder="MM/YY"
-              onChange={(e) =>
-                setCard({ ...card, expiry: e.target.value })
-              }
+              onChange={(e) => setCard({ ...card, expiry: e.target.value })}
             />
             <input
               className="wallet-input"
               placeholder="CVV"
-              onChange={(e) =>
-                setCard({ ...card, cvv: e.target.value })
-              }
+              onChange={(e) => setCard({ ...card, cvv: e.target.value })}
             />
           </>
         )}
 
-        <button
-          className="wallet-add-btn"
-          onClick={addBalance}
-        >
+        <button className="wallet-add-btn" onClick={addBalance}>
           Add Balance
         </button>
 
-        {/* ----------- WITHDRAW SECTION (NEW) ----------- */}
         <h4 style={{ marginTop: "20px" }}>Withdraw Balance</h4>
 
         <input

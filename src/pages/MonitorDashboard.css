@@ -1,214 +1,367 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --bg1: #a8cbff;
+  --bg2: #eaf3ff;
+
+  --header1: #052370;
+  --header2: #6fa8ff;
+
+  --textBlue: #123373;
+  --border: rgba(17, 24, 39, 0.10);
+
+  --card: #ffffff;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.10);
+  --softShadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  --tinyShadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+
+  --glass: rgba(255, 255, 255, 0.72);
+}
+
 /* ================================
-   🌟 ROOT DASHBOARD
+   ROOT
 ================================ */
 .monitor-dashboard {
   width: 100%;
   height: 100vh;
-  background: #f0f2f5;
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  font-family: "Poppins", sans-serif;
-  overflow: hidden;
+
+  background:
+    radial-gradient(900px 500px at 15% 15%, rgba(255,255,255,0.55), transparent 55%),
+    radial-gradient(900px 500px at 85% 20%, rgba(255,255,255,0.45), transparent 55%),
+    linear-gradient(135deg, var(--bg1), var(--bg2));
 }
 
 /* ================================
-   🌟 HEADER (MATCH SCREENSHOT)
+   HEADER (premium)
 ================================ */
 header {
-  width: 100%;
-  background: #3b6ea8;
-  padding: 12px 22px;
-  color: white;
+  width: calc(100% - 44px);
+  margin: 16px auto 12px;
+  padding: 18px 18px;
+
+  background: linear-gradient(135deg, var(--header1), var(--header2));
+  color: #fff;
+
+  border-radius: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  box-shadow: var(--softShadow);
+  border: 1px solid rgba(255,255,255,0.20);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle shine */
+header::before {
+  content: "";
+  position: absolute;
+  inset: -60px -60px auto auto;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 60%);
+  transform: rotate(18deg);
 }
 
 .canteen-name {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 800;
   line-height: 1.2;
+  position: relative;
+  z-index: 1;
 }
 
 .sub-canteen-name {
   font-size: 12px;
-  opacity: 0.9;
-  margin-top: 2px;
+  opacity: 0.92;
+  margin-top: 4px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
 }
 
 .time {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
 }
 
 /* ================================
-   🌟 TOOLBAR (COMPACT)
+   TOOLBAR (glassy card)
 ================================ */
 .toolbar {
+  width: calc(100% - 44px);
+  margin: 0 auto 12px;
+  padding: 12px;
+
   display: flex;
   align-items: center;
-  padding: 8px 20px;
   gap: 12px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+
+  background: var(--glass);
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 16px;
+
+  box-shadow: var(--tinyShadow);
+  backdrop-filter: blur(10px);
 }
 
+/* Filter chip */
 .filter-btn {
-  background: #34a853;
-  color: white;
+  background: #123373;
+  color: #fff;
   border: none;
-  padding: 6px 14px;
-  border-radius: 4px;
+  padding: 10px 16px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 800;
+  box-shadow: 0 10px 18px rgba(18, 51, 115, 0.28);
+}
+
+.filter-btn:active {
+  transform: scale(0.98);
 }
 
 .search-box {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   flex: 1;
 }
 
+/* Search input (premium) */
 .search-box input {
   width: 100%;
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 4px;
-  border: 1px solid #d1d5db;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1.8px solid rgba(0,0,0,0.12);
   font-size: 13px;
   outline: none;
+  background: rgba(255,255,255,0.92);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
 }
 
+.search-box input:focus {
+  border-color: rgba(18, 51, 115, 0.35);
+  box-shadow: 0 0 0 4px rgba(111,168,255,0.25);
+}
+
+/* Buttons */
 .search-box button {
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 4px;
-  background: #e5e7eb;
-  border: 1px solid #d1d5db;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 14px;
   cursor: pointer;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 800;
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: var(--tinyShadow);
+}
+
+/* Primary = Update Menu */
+.search-box button:nth-of-type(1) {
+  background: #123373;
+  color: #fff;
+  border: none;
+  box-shadow: 0 10px 18px rgba(18, 51, 115, 0.26);
+}
+
+.search-box button:nth-of-type(2) {
+  background: #123373;
+  color: #fff;
+  border: none;
+  box-shadow: 0 10px 18px rgba(18, 51, 115, 0.26);
+}
+
+
+.search-box button:active {
+  transform: scale(0.99);
 }
 
 /* ================================
-   🌟 ORDER GRID
+   ORDER GRID WRAPPER (card)
 ================================ */
 #orderContainer {
-  padding: 20px;
+  width: calc(100% - 44px);
+  margin: 0 auto 16px;
+
+  padding: 16px;
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(255,255,255,0.65);
+  border-radius: 18px;
+  box-shadow: var(--softShadow);
+  backdrop-filter: blur(10px);
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 16px;
+
   overflow-y: auto;
 }
 
+/* hide scrollbar */
+#orderContainer {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#orderContainer::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 /* ================================
-   🌟 ORDER CARD
+   ORDER CARD (modern)
 ================================ */
 .order-card {
-  background: rgb(243, 242, 242);
-  border-radius: 0px;
-  padding: 16px;
-  box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.86));
+  border-radius: 16px;
+  padding: 14px;
+
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle top accent */
+.order-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #052370, #6fa8ff);
+  opacity: 0.9;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.18s ease;
 }
 
 .order-id {
-  color: #0954bc;
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 10px;
+  color: var(--textBlue);
+  font-size: 15px;
+  font-weight: 900;
+  margin: 6px 0 10px;
+  letter-spacing: 0.2px;
 }
 
 .order-details {
-  color: #0954bc;
+  color: #334155;
   font-size: 13px;
-  margin-bottom: 10px;
+  line-height: 1.55;
+  margin-bottom: 12px;
 }
 
 /* ================================
-   🌟 STATUS BUTTONS
+   STATUS BUTTON (pill)
 ================================ */
 .order-actions {
   margin-bottom: 10px;
 }
 
 .order-actions .btn {
-  padding: 6px 12px;
-  border-radius: 4px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 999px;
   border: none;
   font-size: 12px;
+  font-weight: 900;
   cursor: pointer;
+  box-shadow: var(--tinyShadow);
 }
 
-.order-actions .btn.order-received {
-  background: #ffecd2;
-  color: #ff9500;
+.order-actions .btn:active {
+  transform: scale(0.99);
 }
 
-.order-actions .btn.preparing {
-  background: #dbeafe;
-  color: #1e40af;
-}
-
-.order-actions .btn.prepared {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.order-actions .btn.delivered {
-  background: #f3e8ff;
-  color: #6b21a8;
-}
-
-.order-actions .btn.cancellation-requested {
-  background: #fee2e2;
-  color: #b91c1c;
-}
-
+/* keep your semantic colors but refined */
+.order-actions .btn.order-received { background: #ffecd2; color: #b45309; }
+.order-actions .btn.preparing      { background: #dbeafe; color: #1e40af; }
+.order-actions .btn.prepared       { background: #dcfce7; color: #166534; }
+.order-actions .btn.delivered      { background: #f3e8ff; color: #6b21a8; }
+.order-actions .btn.cancellation-requested { background: #fee2e2; color: #b91c1c; }
 
 /* ================================
-   🌟 COMMENTS
+   COMMENTS (soft)
 ================================ */
 .order-comment {
-  margin-top: 8px;
-  padding: 8px;
-  background: #f1f5f9;
-  border-radius: 6px;
+  margin-top: 6px;
+  padding: 10px 12px;
+  background: rgba(246, 248, 255, 0.95);
+  border: 1px solid rgba(224, 220, 255, 0.75);
+  border-radius: 12px;
   font-size: 12px;
-   color: #331ba0;
+  color: #331ba0;
 }
 
 /* ================================
-   📱 RESPONSIVE
+   SUPPORT CHAT (nice card)
 ================================ */
-@media (max-width: 900px) {
-  .monitor-dashboard {
-    transform: scale(0.9);
-    transform-origin: top center;
-  }
-
-  #orderContainer {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.support-chat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
 }
 
-@media (max-width: 600px) {
-  #orderContainer {
-    grid-template-columns: repeat(1, 1fr);
-  }
+.support-chat > div {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: #334155;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: var(--tinyShadow);
+}
+
+.support-chat > button {
+  padding: 10px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: var(--tinyShadow);
+}
+
+.support-chat > button:active { transform: scale(0.99); }
+
+.support-chat > button:first-of-type {
+  background: #dcfce7;
+  color: #0b0b0b;
+}
+
+.support-chat > button:last-of-type {
+  background: #fee2e2;
+  color: #0b0b0b;
 }
 
 /* ================================
-   🔥 QR OVERLAY
+   QR OVERLAY (premium modal)
 ================================ */
 .qr-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.60);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,65 +369,47 @@ header {
 }
 
 .qr-box {
-  background: white;
+  width: 360px;
+  background: rgba(255,255,255,0.96);
+  border-radius: 18px;
   padding: 16px;
-  border-radius: 10px;
-  width: 320px;
   text-align: center;
+
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.qr-box button {
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 999px;
+  background: #123373;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 10px 18px rgba(18, 51, 115, 0.26);
+}
+
+.qr-box button:active { transform: scale(0.99); }
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 1100px) {
+  #orderContainer { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 700px) {
+  header, .toolbar, #orderContainer { width: calc(100% - 20px); }
+  #orderContainer { grid-template-columns: repeat(1, 1fr); }
 }
 
 /* ================================
-   🌟 FADE IN
+   FADE IN
 ================================ */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* ======================================================
-   🔥 FORCE SIDE-BY-SIDE ACCEPT / REJECT BUTTONS
-   (ADD-ONLY — DOES NOT MODIFY EXISTING STYLES)
-====================================================== */
-
-.support-chat {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* Chat messages take full width */
-.support-chat > div {
-  grid-column: 1 / -1;
-}
-
-/* Buttons */
-.support-chat > button {
-  padding: 6px 10px;
-  font-size: 13px;
-  border-radius: 10px;
-  background: #ffffff;
-  border: 2px solid #111827;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-/* Accept hover */
-.support-chat > button:first-of-type {
-  background: #dcfce7;
-  border-color: #166534;
-  color: #0b0b0b;
-}
-
-/* Reject hover */
-.support-chat > button:last-of-type {
-  background: #fee2e2;
-  border-color: #b91c1c;
-  color: #0b0b0b;
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
 }

@@ -1,116 +1,166 @@
+/* ===============================
+   Rewards Page — UI like attached image
+   (NO JSX changes required)
+================================ */
+
 /* Page Layout */
 .rewards-page {
-  padding: 40px 20px;
-  background: #f6f8fb;
+  width: 360px;                 /* mobile frame like your screenshot */
   height: 640px;
-  font-family: "Inter", sans-serif;
+  margin: 10px auto;
+  padding: 14px 14px 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* soft blue background like image */
+  background: linear-gradient(135deg, #a8cbff, #eaf3ff);
+  border-radius: 10px;
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
+/* Header bar (big blue gradient button-style) */
 .rewards-header {
+  width: 100%;
+  padding: 18px 14px;
+  border-radius: 8px;
   text-align: center;
-  margin-bottom: 40px;
-  width:360px;
-  justify-content: center;
+
+  background: linear-gradient(135deg, #123373, #6fa8ff);
+  box-shadow: 0 10px 18px rgba(18, 51, 115, 0.25);
+
+  margin-bottom: 18px;
 }
 
 .rewards-header h1 {
-  font-size: 28px;
+  margin: 0;
+  font-size: 22px;
   font-weight: 700;
-  color: #fff;
+  color: #ffffff;
+  letter-spacing: 0.2px;
 }
 
-.rewards-header p {
-  margin-top: 20px;
-  font-size: 10px;
-  color: #1f2937;
-}
-
-/* Grid */
+/* Grid -> single column like mobile stacked blocks */
 .rewards-grid {
+  width: 100%;
+  margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  width: 360px;
-  margin: 0 auto;
+  grid-template-columns: 1fr;
+  gap: 14px;
+
+  /* allow scrolling inside frame if needed */
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
-/* Card */
+/* Card — white rounded blocks like the textarea/support box */
 .reward-card {
   background: #ffffff;
-  border-radius: 16px;
-  padding: 28px;
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+  border: 1px solid #e6eefc;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+
   position: relative;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .reward-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.10);
 }
 
-/* Tag */
-.reward-tag {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #eef2ff;
-  color: #4338ca;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-
-/* Content */
+/* Text */
 .reward-card h2 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #111827;
-  margin-bottom: 16px;
-}
-
-.reward-highlight {
-  font-size: 28px;
+  margin: 0 0 8px;
+  font-size: 16px;
   font-weight: 700;
-  color: #16a34a;
-  margin-bottom: 12px;
+  color: #123373;
 }
 
 .reward-desc {
-  font-size: 15px;
-  color: #374151;
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-.reward-sub {
+  margin: 0 0 10px;
   font-size: 13px;
-  color: #6b7280;
-  margin-bottom: 20px;
+  line-height: 1.45;
+  color: #2f3b4f;
 }
 
-/* Button */
+/* Highlight — subtle “important line” look */
+.reward-highlight {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #123373;
+}
+
+/* (If you later enable subText in JSX, this will match style) */
+.reward-sub {
+  margin: 0 0 12px;
+  font-size: 12px;
+  color: #5b6b86;
+}
+
+/* Button — big rounded gradient like screenshot buttons */
 .reward-btn {
   width: 100%;
-  padding: 12px 0;
-  background: #4f46e5;
+  height: 54px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+
+  background: linear-gradient(90deg, #123373, #6fa8ff);
   color: #ffffff;
   font-size: 15px;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  font-weight: 700;
+
+  box-shadow: 0 10px 18px rgba(18, 51, 115, 0.22);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
 .reward-btn:hover {
-  background: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(18, 51, 115, 0.28);
 }
 
-/* Responsive tweak */
+.reward-btn:active {
+  transform: translateY(0px);
+  box-shadow: 0 8px 16px rgba(18, 51, 115, 0.22);
+}
+
+/* Optional: if you ever show .reward-tag again */
+.reward-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+
+  background: #eaf3ff;
+  color: #123373;
+  border: 1px solid #d7e6ff;
+}
+
+/* Scrollbar subtle (optional) */
+.rewards-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.rewards-grid::-webkit-scrollbar-thumb {
+  background: rgba(18, 51, 115, 0.18);
+  border-radius: 10px;
+}
+.rewards-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Responsive */
 @media (max-width: 480px) {
-  .rewards-header h1 {
-    font-size: 26px;
+  .rewards-page {
+    width: 100%;
+    max-width: 390px;
+    border-radius: 10px;
   }
 }

@@ -1,70 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* =========================
+   MAIN WRAPPER (like canteen UI)
+========================= */
 .wallet-container {
-  background: #f6f6f6;
-  height: 640px;
-  width: 360px;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  margin: 0 auto;
+
+  background: linear-gradient(135deg, #a8cbff, #eaf3ff);
+  border-radius: 18px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
+/* =========================
+   HEADER (blue bar like image 1)
+========================= */
 .wallet-header {
+  flex-shrink: 0;
+  height: 64px;
+
   display: flex;
   align-items: center;
-  padding: 14px;
-  background: #2563eb;
-  border-bottom: 1px solid #ddd;
   justify-content: center;
+
+  padding: 0 16px;
+  color: #fff;
+
+  background: linear-gradient(135deg, #052370, #6fa8ff);
 }
 
-.wallet-back {
-  font-size: 20px;
+.wallet-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ✅ Back arrow (like canteen header) */
+.wallet-header {
+  position: relative;
+}
+
+.wallet-back-btn {
+  position: absolute;
+  left: 14px;
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
   border: none;
-  background: none;
-  margin-left: 1px;
   cursor: pointer;
 }
 
-.wallet-balance-card {
-  background: linear-gradient(135deg, #0d47a1, #0d47a1);
+.wallet-back-btn svg {
+  font-size: 22px;
   color: #fff;
-  margin: 16px;
-  padding: 4px;
-  border-radius: 12px;
+  display: block;
+}
+
+
+/* =========================
+   BALANCE CARD (compact + clean)
+========================= */
+.wallet-balance-card {
+  margin: 10px 12px 8px;
+  padding: 12px 14px;
+
+  background: #eef5ff;
+  border-radius: 14px;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
 }
 
 .balance-label {
-  font-size: 10px;
-  opacity: 0.9;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #123373;
 }
 
+.wallet-balance-card h1 {
+  margin: 6px 0 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: #0b2a66;
+}
+
+/* =========================
+   MAIN WHITE CARD (like food cards)
+========================= */
 .wallet-card {
-  background: #fff;
-  margin: 12px 16px;
-  padding: 16px;
-  border-radius: 8px;
-  position: relative;
-  padding-bottom: 90px;
-  height: 455px;
+  background: #eef5ff;
+
+  margin: 8px 12px 12px;
+  padding: 14px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+
+  /* keep your layout but make it scroll-friendly */
+  height: auto;
+  flex: 1;
+  overflow-y: auto;
+
+  padding-bottom: 18px;
 }
 
+/* headings inside card */
+.wallet-card h4 {
+  margin: 10px 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #0b2a66;
+}
+
+/* =========================
+   INPUTS (rounded + clean)
+========================= */
 .wallet-input {
-  width: 97%;
-  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 12px;
   margin-top: 8px;
   margin-bottom: 10px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  outline: none;
+
+  font-size: 14px;
 }
 
+.wallet-input:focus {
+  border-color: rgba(18, 51, 115, 0.55);
+}
+
+/* =========================
+   PAYMENT OPTIONS (UPI / CARD rows)
+========================= */
+.wallet-card .payment-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 12px;
+  margin: 8px 0;
+
+  border-radius: 12px;
+  background: #ffffff;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.wallet-card .payment-option span {
+  font-size: 15px;
+  font-weight: 700;
+  color: #202124;
+}
+
+/* =========================
+   BUTTONS (same vibe as canteen buttons)
+========================= */
 .wallet-add-btn {
-  width: 90%;
-  padding: 14px;
-  font-size: 16px;
-  background: #0d47a1;
-  color: #fff;
+  width: 100%;
+  height: 52px;
+
+  margin-top: 6px;
+
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
+
+  background: #123373;
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+
+  box-shadow: 0 10px 18px rgba(18, 51, 115, 0.20);
 }
 
+/* keep this class but remove absolute positioning (so it matches card flow) */
 .wallet-add-btn-bottom {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: static;
+  transform: none;
+  left: auto;
+  bottom: auto;
+  margin-top: 12px;
+}
+
+/* =========================
+   DESKTOP: keep mobile card centered
+========================= */
+@media (min-width: 768px) {
+  body {
+    background: #cfe3ff;
+  }
+
+  .wallet-container {
+    margin: 18px auto;
+    height: calc(100vh - 36px);
+  }
 }

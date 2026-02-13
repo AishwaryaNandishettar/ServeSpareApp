@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html, body {
@@ -34,7 +34,7 @@ html, body {
 =========================== */
 .navbar {
   background: linear-gradient(135deg,#052370,#6fa8ff);
-  padding: 14px;
+  padding: 10px;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
@@ -124,7 +124,7 @@ html, body {
 =========================== */
 .foods-category-card {
   width: 100%;
-  margin-top: 25px;
+  margin-top: 15px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
@@ -134,7 +134,7 @@ html, body {
    FOOD CARD
 =========================== */
 .foods-card-new {
-  background: #ffffff;
+  background: #eef5ff;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
@@ -265,3 +265,494 @@ html, body {
   color: #f1c40f; /* yellow */
 }
 
+/* ============================
+   ✅ PRICE ROW (NO STYLE BREAK)
+============================ */
+.foods-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.foods-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #123373;
+  white-space: nowrap;
+}
+
+/* ============================
+   ✅ SHINIER HEADER ICONS
+============================ */
+.header-icon {
+  background: linear-gradient(135deg, rgba(255,255,255,0.45), rgba(255,255,255,0.18));
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.header-icon:hover {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.45);
+  filter: brightness(1.06);
+}
+
+/* ============================
+   ✅ QTY PILL SMALLER (LIKE 2ND IMAGE)
+   (Only affects qty pill, not Add To Cart button)
+============================ */
+.qty-box {
+  height: 32px;              /* reduced from 38 */
+  padding: 0 8px;            /* tighter */
+  border-radius: 10px;       /* pill look */
+}
+
+.qty-box button {
+  font-size: 16px;           /* reduced from 20 */
+  line-height: 1;
+}
+
+/* ✅ Make qty pill align nicely on mobile row cards */
+@media (max-width: 420px) {
+  .foods-title-row h4 {
+    font-size: 14px;
+  }
+
+  .foods-price {
+    font-size: 12px;
+  }
+
+  .qty-box {
+    height: 28px;
+    padding: 0 7px;
+    border-radius: 9px;
+    width: 90px;            /* compact pill like your screenshot */
+    margin-left: auto;      /* pushes to right neatly */
+  }
+
+  .qty-box button {
+    font-size: 15px;
+  }
+}
+
+/* ===============================
+   ✅ FORCE QTY PILL RIGHT ALIGN
+   (CSS ONLY – NO JSX / LOGIC)
+================================ */
+
+/* Make card info a flex column */
+@media (max-width: 420px) {
+  .foods-card-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Push qty pill to the right edge */
+  .qty-box {
+    margin-left: auto;     /* 🔥 key line */
+    margin-top: 6px;
+    width: 92px;           /* matches image 2 pill width */
+    height: 28px;
+    border-radius: 9px;
+    padding: 0 8px;
+  }
+
+  .qty-box span {
+    font-size: 13px;
+  }
+
+  .qty-box button {
+    font-size: 15px;
+  }
+}
+
+/* ==========================================
+   ✅ CENTER QTY PILL + PERFECT INNER ALIGNMENT
+   (override the previous "right align" rules)
+========================================== */
+
+@media (max-width: 420px) {
+  /* keep your column layout */
+  .foods-card-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ✅ center the pill */
+  .qty-box {
+    margin-left: 0 !important;     /* overrides auto */
+    margin-right: 0 !important;
+    align-self: center;            /* centers inside flex column */
+    margin-top: 8px;
+
+    width: 110px;                  /* a bit wider so content fits clean */
+    height: 30px;
+
+    padding: 0 10px;
+    border-radius: 10px;
+
+    display: flex;                 /* ensure layout inside */
+    align-items: center;           /* vertical center */
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  /* ✅ center the number properly */
+  .qty-box span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  /* ✅ buttons properly centered inside */
+  .qty-box button {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0;
+  }
+}
+
+/* =========================================================
+   ✅ PRICE FIXED TOP-RIGHT + QTY PILL EXACTLY BELOW DESC
+   (MOBILE ONLY — overrides previous alignment blocks)
+========================================================= */
+@media (max-width: 420px) {
+  /* ✅ keep title row intact so price stays top-right */
+  .foods-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ✅ do NOT change global alignment of foods-card-info
+     (prevents price shifting) */
+  .foods-card-info {
+    display: block !important; /* cancels flex column overrides */
+  }
+
+  /* ✅ qty pill exactly below description */
+  .foods-desc + .qty-box {
+    margin-top: 6px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    width: 100px;
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  /* ✅ ensures +, -, and qty are centered inside */
+  .foods-desc + .qty-box span {
+    min-width: 18px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .foods-desc + .qty-box button {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    line-height: 1;
+    padding: 0;
+  }
+}
+
+/* ==========================================
+   ✅ SMOOTH ANIMATION: Add To Cart → Qty Pill
+   (CSS only, no JSX changes)
+========================================== */
+
+/* Add To Cart button exit feel */
+.foods-card-btn {
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.foods-card-btn:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* Qty pill entrance animation */
+.qty-box {
+  animation: qtyIn 0.22s ease-out both;
+  transform-origin: left center;
+}
+
+/* Make content inside pill stable during animation */
+.qty-box button,
+.qty-box span {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/* Slight tap feedback on qty buttons */
+.qty-box button:active {
+  transform: scale(0.92);
+  opacity: 0.9;
+}
+
+@keyframes qtyIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.92);
+    filter: blur(0.2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.floating-menu-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 999;
+  background:#123373;
+  color: #fff;
+  border: none;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.floating-menu-btn:active {
+  transform: scale(0.98);
+}
+
+.menu-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #e2eeff;
+  z-index: 1000;
+}
+
+.menu-sheet {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
+  width: min(420px, calc(100% - 24px));
+  max-height: 70vh;
+  background: #e2eeff;
+  color: #123373;
+  border-radius: 16px;
+  padding: 12px;
+  z-index: 1001;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.menu-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 6px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.menu-sheet-close {
+  background:#e2eeff;
+  color: #123373;
+  border: none;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.menu-sheet-list {
+  margin-top: 10px;
+  overflow-y: auto;
+  max-height: calc(70vh - 60px);
+  padding-right: 4px;
+}
+
+.menu-sheet-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.menu-sheet-item:hover {
+  background: #e2eeff;
+}
+
+.menu-sheet-count {
+  opacity: 0.75;
+  font-weight: 700;
+}
+
+.menu-section-title {
+  margin: 10px 2px 8px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #e2eeff;
+  color: #123373;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ✅ Perfectly align back icon with other header icons */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  /* force same visual height as icon row */
+  min-height: 32px;
+}
+
+.brand-name {
+  /* stops text line-box from shifting the icon */
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* ensure back icon sits exactly centered */
+.back-btn {
+  align-self: center;
+}
+
+/* ✅ FINAL: force back button circle to align on the same horizontal line */
+.header-left {
+  align-items: center !important;
+}
+
+.brand-name {
+  line-height: 32px !important;   /* matches icon height */
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* nudge the WHOLE back button (circle) */
+.back-btn {
+  position: relative;
+  top: 2px; /* adjust to 1px or 3px if needed */
+}
+
+/* keep svg perfectly centered inside circle */
+.back-btn svg {
+  display: block;
+}
+
+/* ✅ HARD OVERRIDE: back button + title on the exact same horizontal center line */
+.navbar {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.navbar .header-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* force the back button circle to behave like a perfect flex item */
+.navbar .header-left .back-btn {
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 32px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: static !important;   /* cancels any top/bottom shifts */
+  transform: translateY(0) !important;
+}
+
+/* title baseline is what usually breaks alignment */
+.navbar .header-left .brand-name {
+  display: flex !important;
+  align-items: center !important;
+  line-height: 1 !important;     /* removes baseline offset */
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* keep icon centered inside the circle */
+.navbar .header-left .back-btn svg {
+  display: block !important;
+}
+
+/* ✅ Back button: remove background circle, keep only arrow (override) */
+.navbar .header-left .back-btn {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
+  /* keep same clickable area & alignment */
+  width: 32px !important;
+  height: 32px !important;
+  flex: 0 0 32px !important;
+  padding: 0 !important;
+
+  /* cancel previous nudges */
+  position: static !important;
+  top: auto !important;
+  transform: none !important;
+}
+
+/* ✅ prevent hover "circle" feel */
+.navbar .header-left .back-btn:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* optional: make arrow look crisp */
+.navbar .header-left .back-btn svg {
+  display: block !important;
+  font-size: 20px;
+}
+
+/* =========================================================
+   ✅ Add To Cart = SAME SIZE AS QTY PILL (MOBILE ONLY)
+   (NO JSX / NO LOGIC CHANGES)
+========================================================= */
+@media (max-width: 420px) {
+  .foods-card-btn {
+    width: 100px;          /* same as qty pill */
+    height: 28px;          /* same as qty pill */
+    padding: 0;            /* remove default padding */
+    border-radius: 9px;    /* same radius as pill */
+    font-size: 12px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

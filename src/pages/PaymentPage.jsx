@@ -1,17 +1,33 @@
-import React, { useEffect, useState } from "react";
+// PaymentPage.jsx
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/payment.css";
 import { useNavigate } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
+
+/* ✅ IMPORT IMAGES FROM src/assets */
+import gpayImg from "../assets/IMG_0962.WEBP";
+import phonepeImg from "../assets/IMG_0963.WEBP";
+import rupayImg from "../assets/RuPay.png";
+
+/* ✅ OPTIONAL: icons for other payment options (make sure these files exist in src/assets) */
+import cardImg from "../assets/IMG_0966.PNG";
+import walletImg from "../assets/Wallet.jpg";        // ✅ FIXED: assets (not asset)
+import slicePayImg from "../assets/IMG_0965.JPG";    // ✅ using your existing import
+import razorPayImg from "../assets/RazorPay.png";    // ✅ using your existing import
 
 const PaymentPage = () => {
   const [invoice, setInvoice] = useState(null);
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [upiId, setUpiId] = useState("");
   const [upiVerified, setUpiVerified] = useState(false);
-  const [showUPI, setShowUPI] = useState(false);
+  const [showUPI, setShowUPI] = useState(false); // "gpay" | "phonepe" | "rupay" | false
   const [showCard, setShowCard] = useState(false);
   const [showWallet, setShowWallet] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [walletBalance, setWalletBalance] = useState(0);
+
+  const paymentScrollRef = useRef(null);
+  const paymentContainerRef = useRef(null);
 
   const [card, setCard] = useState({
     number: "",
@@ -21,6 +37,26 @@ const PaymentPage = () => {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowUPI(false);
+      setShowCard(false);
+      setShowWallet(false);
+      setUpiVerified(false);
+    };
+
+    const el = paymentScrollRef.current;
+    if (el) {
+      el.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (el) {
+        el.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("latestInvoice"));
@@ -39,9 +75,7 @@ const PaymentPage = () => {
   // ---------- PAYMENT LOGIC (UNCHANGED) ----------
   const completePayment = (method) => {
     const pending = JSON.parse(localStorage.getItem("pendingOrders")) || [];
-    const updatedPending = pending.filter(
-      (o) => o.orderId !== invoice.orderId
-    );
+    const updatedPending = pending.filter((o) => o.orderId !== invoice.orderId);
     localStorage.setItem("pendingOrders", JSON.stringify(updatedPending));
 
     const completed = JSON.parse(localStorage.getItem("completedOrders")) || [];
@@ -71,8 +105,7 @@ const PaymentPage = () => {
 
     if (selectedMethod === "Wallet") {
       const balance = Number(localStorage.getItem("walletBalance")) || 0;
-      if (balance < invoice.total)
-        return alert("Insufficient wallet balance");
+      if (balance < invoice.total) return alert("Insufficient wallet balance");
 
       localStorage.setItem("walletBalance", balance - invoice.total);
       return completePayment("Wallet");
@@ -104,266 +137,286 @@ const PaymentPage = () => {
     alert("Card saved for future payments");
   };
 
-  return (
-    <div className="payment-container">
-      <header className="payment-header">
-        <h3>Bill total ₹{invoice.total}</h3>
-      </header>
-
-      {/* ---------- UPI ---------- */}
-      <section className="payment-section">
-        <p className="section-title">RECOMMENDED</p>
-
-        <div
-          className="payment-option"
-          onClick={() => {
-            setSelectedMethod("Google Pay UPI");
-            setShowUPI(true);
-            setShowCard(false);
-            setShowWallet(false);
-            setUpiVerified(false);
-          }}
-        >
-          <img src="/image/gpay.png" alt="GPay" />
-          <span>Google Pay UPI</span>
-          <span className="arrow">›</span>
-        </div>
-
-        <div
-          className="payment-option"
-          onClick={() => {
-            setSelectedMethod("PhonePe UPI");
-            setShowUPI(true);
-            setShowCard(false);
-            setShowWallet(false);
-            setUpiVerified(false);
-          }}
-        >
-          <img src="/image/phonepe.png" alt="PhonePe" />
-          <span>PhonePe UPI</span>
-          <span className="arrow">›</span>
-        </div>
-
-         <div
-          className="payment-option"
-          onClick={() => {
-            setSelectedMethod("Google Pay UPI");
-            setShowUPI(true);
-            setShowCard(false);
-            setShowWallet(false);
-            setUpiVerified(false);
-          }}
-        >
-          <img src="/image/Rupay.png" alt="RuPay" />
-          <span>RuPay Credit UPI</span>
-          <span className="arrow">›</span>
-        </div>
-
-        {showUPI && (
-          <div style={{ padding: "14px 16px", display: "flex", gap: 8 }}>
-           <input
-  placeholder="Enter UPI ID"
-  value={upiId}
-  onChange={(e) => {
-    setUpiId(e.target.value);
+  const closeAllForms = () => {
+    setShowUPI(false);
+    setShowCard(false);
+    setShowWallet(false);
     setUpiVerified(false);
-  }}
-  style={{
-    flex: 1,
-    padding: "8px",
-    borderRadius: 10,
-    border: "2px solid #ddd",
-  }}
-/>
-            <button
-              onClick={() => {
-                if (!upiId) return alert("Enter UPI ID");
-                alert("UPI Verified");
-                setUpiVerified(true);
-              }}
-              style={{
-                padding: "8px 12px",
-                background: "#36297a",
-                color: "#fff",
-                border: "none",
-                borderRadius: 10,
-              }}
-            >
-              Verify
-            </button>
-          </div>
-        )}
-      </section>
+  };
 
-      {/* ---------- CARDS ---------- */}
-      <section className="payment-section">
-        <p className="section-title">CARDS</p>
+  return (
+    <div className="payment-container" onClick={closeAllForms}>
+      {/* 🔹 HEADER */}
+     <header className="payment-header">
+  <span
+    className="payment-back-btn"
+    onClick={() => navigate(-1)}
+    title="Back"
+  >
+    <FiArrowLeft />
+  </span>
 
-        <div
-          className="payment-option"
-          onClick={() => {
-            setSelectedMethod("Card Payment");
-            setShowCard(true);
-            setShowUPI(false);
-            setShowWallet(false);
-          }}
-        >
-          <span>Add credit or debit cards</span>
-          <span className="add">ADD</span>
-        </div>
+  <h3>Bill total ₹{invoice.total}</h3>
+</header>
 
-        {showCard && (
-          <div className="card-form">
-            <input
-              className="card-input"
-              placeholder="Card number"
-              value={card.number}
-              onChange={(e) => setCard({ ...card, number: e.target.value })}
-            />
 
-            <input
-              className="card-input"
-              placeholder="Card holder name"
-              value={card.name}
-              onChange={(e) => setCard({ ...card, name: e.target.value })}
-            />
-
-            <label className="expiry-label">Expiry date</label>
-
-            <div className="expiry-row">
-              <select
-                value={card.expiry.split("/")[0] || ""}
-                onChange={(e) =>
-                  setCard({
-                    ...card,
-                    expiry: `${e.target.value}/${card.expiry.split("/")[1] || ""}`,
-                  })
-                }
-              >
-                <option value="">MM</option>
-                {[...Array(12)].map((_, i) => (
-                  <option key={i} value={String(i + 1).padStart(2, "0")}>
-                    {String(i + 1).padStart(2, "0")}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                value={card.expiry.split("/")[1] || ""}
-                onChange={(e) =>
-                  setCard({
-                    ...card,
-                    expiry: `${card.expiry.split("/")[0] || ""}/${e.target.value}`,
-                  })
-                }
-              >
-                <option value="">YYYY</option>
-                {[2024, 2025, 2026, 2027, 2028, 2029].map((y) => (
-                  <option key={y} value={y}>
-                    {y}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <input
-              className="card-input"
-              placeholder="CVV"
-              value={card.cvv}
-              onChange={(e) => setCard({ ...card, cvv: e.target.value })}
-            />
-
-            <button className="card-save-btn" onClick={handleSaveCard}>
-              Save
-            </button>
-          </div>
-        )}
-      </section>
-
-      {/* ---------- WALLET ---------- */}
-      <section className="payment-section">
-        <p className="section-title">WALLET</p>
-
-        <div
-          className="payment-option"
-          onClick={() => {
-            setSelectedMethod("Wallet");
-            setShowWallet(true);
-            setShowUPI(false);
-            setShowCard(false);
-          }}
-        >
-          <span>Wallet</span>
-          <span className="arrow">›</span>
-        </div>
-
-        {showWallet && (
-          <div className="wallet-balance">
-            <p>
-              Available Balance: <b>₹{walletBalance}</b>
-            </p>
-            {walletBalance < invoice.total && (
-              <p className="wallet-warning">Insufficient wallet balance</p>
-            )}
-          </div>
-        )}
-      </section>
-
-      {/* ---------- PAY LATER (RESTORED & UNCHANGED) ---------- */}
-      <section className="payment-section">
-        <p className="section-title">PAY LATER</p>
-
-        <div
-          className="payment-option"
-          onClick={() => setSelectedMethod("Slice Pay")}
-        >
-          <span>Slice Pay</span>
-          <span className="arrow">›</span>
-        </div>
-
-        <div
-          className="payment-option"
-          onClick={() => setSelectedMethod("Razorpay")}
-        >
-          <span>Razorpay</span>
-          <span className="arrow">›</span>
-        </div>
-
-        <div
-          className="payment-option"
-          onClick={() => setSelectedMethod("Pay Later")}
-        >
-          <span>Pay Later</span>
-          <span className="arrow">›</span>
-        </div>
-      </section>
-
-      {/* ---------- PAY NOW ---------- */}
+      {/* 🔹 SCROLLABLE PAYMENT CONTENT */}
       <div
-        style={{
-          background: "#fff",
-          borderTop: "1px solid #ddd",
-          padding: 12,
-          display: "flex",
-          justifyContent: "center",
-          marginTop: 12,
+        className="payment-scroll"
+        ref={(el) => {
+          paymentScrollRef.current = el;
+          paymentContainerRef.current = el;
         }}
+        onClick={(e) => e.stopPropagation()}
       >
-        <button
-          style={{
-            width: 360,
-            padding: "14px",
-            fontSize: 16,
-            fontWeight: "bold",
-            background: "#39017a",
-            color: "#fff",
-            border: "none",
-            borderRadius: 4,
-            opacity: processing ? 0.7 : 1,
-          }}
-          disabled={processing}
-          onClick={handlePayNow}
-        >
+        <section className="payment-section">
+          {/* ================= RECOMMENDED ================= */}
+          <p className="section-title">RECOMMENDED</p>
+
+          <div
+            className="payment-option"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedMethod("Google Pay UPI");
+              setShowUPI("gpay");
+              setShowCard(false);
+              setShowWallet(false);
+              setUpiVerified(false);
+            }}
+          >
+            <img src={gpayImg} alt="GPay" />
+            <span>Google Pay UPI</span>
+            <span className="arrow">›</span>
+          </div>
+
+          {showUPI === "gpay" && (
+            <div className="card-form" onClick={(e) => e.stopPropagation()}>
+              <input
+                type="text"
+                className="card-input"
+                placeholder="Enter UPI ID"
+                value={upiId}
+                onChange={(e) => {
+                  setUpiId(e.target.value);
+                  setUpiVerified(false);
+                }}
+              />
+              <button
+                className="card-save-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!upiId.includes("@")) return alert("Invalid UPI ID");
+                  setUpiVerified(true);
+                  alert("UPI Verified");
+                }}
+              >
+                Verify
+              </button>
+            </div>
+          )}
+
+          <div
+            className="payment-option"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedMethod("PhonePe UPI");
+              setShowUPI("phonepe");
+              setShowCard(false);
+              setShowWallet(false);
+              setUpiVerified(false);
+            }}
+          >
+            <img src={phonepeImg} alt="PhonePe" />
+            <span>PhonePe UPI</span>
+            <span className="arrow">›</span>
+          </div>
+
+          {showUPI === "phonepe" && (
+            <div className="card-form" onClick={(e) => e.stopPropagation()}>
+              <input
+                type="text"
+                className="card-input"
+                placeholder="Enter UPI ID"
+                value={upiId}
+                onChange={(e) => {
+                  setUpiId(e.target.value);
+                  setUpiVerified(false);
+                }}
+              />
+              <button
+                className="card-save-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!upiId.includes("@")) return alert("Invalid UPI ID");
+                  setUpiVerified(true);
+                  alert("UPI Verified");
+                }}
+              >
+                Verify
+              </button>
+            </div>
+          )}
+
+          <div
+            className="payment-option"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedMethod("RuPay Credit UPI");
+              setShowUPI("rupay");
+              setShowCard(false);
+              setShowWallet(false);
+              setUpiVerified(false);
+            }}
+          >
+            <img src={rupayImg} alt="RuPay" />
+            <span>RuPay Credit UPI</span>
+            <span className="arrow">›</span>
+          </div>
+
+          {showUPI === "rupay" && (
+            <div className="card-form" onClick={(e) => e.stopPropagation()}>
+              <input
+                type="text"
+                className="card-input"
+                placeholder="Enter UPI ID"
+                value={upiId}
+                onChange={(e) => {
+                  setUpiId(e.target.value);
+                  setUpiVerified(false);
+                }}
+              />
+              <button
+                className="card-save-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (!upiId.includes("@")) return alert("Invalid UPI ID");
+                  setUpiVerified(true);
+                  alert("UPI Verified");
+                }}
+              >
+                Verify
+              </button>
+            </div>
+          )}
+
+          {/* ================= CARDS ================= */}
+          <p className="section-title">CARDS</p>
+
+          <div
+            className="payment-option"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedMethod("Card Payment");
+              setShowCard(true);
+              setShowUPI(false);
+              setShowWallet(false);
+            }}
+          >
+            <img src={cardImg} alt="Cards" />
+            <span>Add credit or debit cards</span>
+            <span className="add">ADD</span>
+          </div>
+
+          {showCard && (
+            <div className="card-form" onClick={(e) => e.stopPropagation()}>
+              <input
+                className="card-input"
+                placeholder="Card Number"
+                value={card.number}
+                onChange={(e) => setCard({ ...card, number: e.target.value })}
+              />
+              <input
+                className="card-input"
+                placeholder="Name on Card"
+                value={card.name}
+                onChange={(e) => setCard({ ...card, name: e.target.value })}
+              />
+              <div className="expiry-row">
+                <input
+                  className="card-input"
+                  placeholder="MM/YY"
+                  value={card.expiry}
+                  onChange={(e) => setCard({ ...card, expiry: e.target.value })}
+                />
+                <input
+                  className="card-input"
+                  placeholder="CVV"
+                  value={card.cvv}
+                  onChange={(e) => setCard({ ...card, cvv: e.target.value })}
+                />
+              </div>
+
+              <button
+                className="card-save-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSaveCard();
+                }}
+              >
+                Save Card
+              </button>
+            </div>
+          )}
+
+          {/* ================= WALLET ================= */}
+          <p className="section-title">WALLET</p>
+
+          <div
+            className="payment-option"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedMethod("Wallet");
+              setShowWallet(true);
+              setShowUPI(false);
+              setShowCard(false);
+            }}
+          >
+            <img src={walletImg} alt="Wallet" />
+            <span>Wallet</span>
+            <span className="arrow">›</span>
+          </div>
+
+          {showWallet && (
+            <div className="wallet-balance" onClick={(e) => e.stopPropagation()}>
+              Wallet Balance: ₹{walletBalance}
+              {walletBalance < invoice.total && (
+                <div className="wallet-warning">Insufficient balance</div>
+              )}
+            </div>
+          )}
+
+          {/* ================= PAY LATER ================= */}
+          <p className="section-title">PAY LATER</p>
+
+          <div
+            className="payment-option"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedMethod("Slice Pay");
+            }}
+          >
+            <img src={slicePayImg} alt="Slice Pay" />
+            <span>Slice Pay</span>
+            <span className="arrow">›</span>
+          </div>
+
+          <div
+            className="payment-option"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedMethod("Razorpay");
+            }}
+          >
+            <img src={razorPayImg} alt="Razorpay" />
+            <span>Razorpay</span>
+            <span className="arrow">›</span>
+          </div>
+        </section>
+      </div>
+
+      {/* 🔹 PAY NOW (SAME CONTAINER, STICKY) */}
+      <div className="pay-now-fixed" onClick={(e) => e.stopPropagation()}>
+        <button disabled={processing} onClick={handlePayNow}>
           {processing ? "Processing..." : "Pay Now"}
         </button>
       </div>

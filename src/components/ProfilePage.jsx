@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import "../styles/profile.css";
 import { useNavigate } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -48,10 +49,22 @@ const ProfilePage = () => {
     <div className="profile-container">
       {/* HEADER */}
       <header className="header5">
-        <i
-          className="fa-solid fa-arrow-left back-btn"
+        {/* ✅ FORCE-VISIBLE BACK BUTTON */}
+        <span
           onClick={() => navigate(-1)}
-        ></i>
+          title="Back"
+          style={{
+            position: "absolute",
+            left: "16px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            cursor: "pointer",
+            zIndex: 10,
+            color: "#ffffff",
+          }}
+        >
+          <FiArrowLeft size={22} />
+        </span>
 
         <h2 className="header-title">Profile</h2>
       </header>
@@ -62,7 +75,7 @@ const ProfilePage = () => {
           <div className="profile-left">
             <h3>John</h3>
             <p className="phone">+91 - xxxxxxxxx</p>
-            <p className="email">john@gmail.com</p> 
+            <p className="email">john@gmail.com</p>
           </div>
 
           <div className="add-photo">
@@ -76,7 +89,13 @@ const ProfilePage = () => {
                 color: photo ? "transparent" : "#003366",
               }}
             >
-              {!photo && <>ADD<br />PHOTO</>}
+              {!photo && (
+                <>
+                  ADD
+                  <br />
+                  PHOTO
+                </>
+              )}
             </div>
 
             <input

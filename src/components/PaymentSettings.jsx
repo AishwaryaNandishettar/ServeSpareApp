@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import "../styles/payment1.css"; // Keep your same CSS
+import "../styles/payment1.css";
 import { FaCreditCard, FaPlus, FaUniversity } from "react-icons/fa";
+import { FiArrowLeft } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const PaymentSettings = () => {
+  const navigate = useNavigate();
+
   const [openSection, setOpenSection] = useState({
     card: false,
     upi: false,
@@ -23,7 +27,18 @@ const PaymentSettings = () => {
 
   return (
     <div className="payment-container">
-      <h2>Payment Settings</h2>
+      {/* ✅ HEADER (same look as before) + back button */}
+      <div className="payment-header-bar">
+        <span
+          className="payment-back-btn"
+          onClick={() => navigate(-1)}
+          title="Back"
+        >
+          <FiArrowLeft size={22} />
+        </span>
+
+        <h2>Payment Settings</h2>
+      </div>
 
       {/* ================= CARDS ================= */}
       <div className="section">
@@ -48,9 +63,7 @@ const PaymentSettings = () => {
               <select>
                 <option>MM</option>
                 {[...Array(12)].map((_, i) => (
-                  <option key={i}>
-                    {String(i + 1).padStart(2, "0")}
-                  </option>
+                  <option key={i}>{String(i + 1).padStart(2, "0")}</option>
                 ))}
               </select>
 
@@ -96,10 +109,7 @@ const PaymentSettings = () => {
 
         {openSection.upi && (
           <div className="details" style={{ display: "flex" }}>
-            <input
-              type="text"
-              placeholder="Enter your UPI ID (e.g., name@upi)"
-            />
+            <input type="text" placeholder="Enter your UPI ID (e.g., name@upi)" />
             <button onClick={() => alert("UPI Verified Successfully!")}>
               Verify
             </button>
@@ -111,10 +121,7 @@ const PaymentSettings = () => {
       <div className="section">
         <h3>WALLETS</h3>
 
-        <div
-          className="option"
-          onClick={() => verifyWallet("Amazon Pay Balance")}
-        >
+        <div className="option" onClick={() => verifyWallet("Amazon Pay Balance")}>
           <img src="/image/IMG_1034.PNG" alt="Amazon" /> Amazon Pay Balance
         </div>
 

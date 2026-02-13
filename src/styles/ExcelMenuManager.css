@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root{
+  --bg1:#a8cbff;
+  --bg2:#eaf3ff;
+  --blue1:#07287d;
+  --blue2:#6fa8ff;
+  --btn:#123373;
+  --btnHover:#0b2558;
+  --text:#0f172a;
+  --border: rgba(15,23,42,.14);
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; 
+  background:#cfe3ff;
+  color:var(--text);
+}
+
+/* ✅ Desktop container auto adjusts */
+.vmm-root{
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  width:min(1400px, calc(100% - 48px));
+  margin:24px auto;
+  padding:24px;
+  border-radius:18px;
+}
+
+/* title */
+.vmm-root h2{
+  text-align:center;
+  font-weight:700;
+  color:var(--blue1);
+  margin: 6px 0 18px;
+  font-size: clamp(22px, 2.2vw, 40px);
+}
+
+/* top actions row */
+.vmm-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:16px;
+}
+
+.vmm-root button{
+  background:var(--btn);
+  color:#fff;
+  border:none;
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:500;
+  cursor:pointer;
+  transition:.2s ease;
+  box-shadow:0 10px 18px rgba(18,51,115,.18);
+}
+
+.vmm-root button:hover{ background:var(--btnHover); }
+.vmm-root button:disabled{ opacity:.6; cursor:not-allowed; box-shadow:none; }
+
+/* upload label */
+.vmm-upload{
+  background:#fff;
+  color:var(--btn);
+  border-radius:14px;
+  font-weight:500;
+  padding:12px 18px;
+  border:2px dashed rgba(18,51,115,.35);
+  cursor:pointer;
+  box-shadow:0 10px 18px rgba(0,0,0,.06);
+}
+
+.vmm-upload input{ display:none; }
+
+/* error */
+.vmm-error{
+  background:#fee2e2;
+  border:1px solid rgba(185,28,28,.2);
+  color:#b91c1c;
+  padding:10px 12px;
+  border-radius:14px;
+  font-weight:500;
+  margin: 0 auto 12px;
+  width: min(900px, 100%);
+}
+
+/* table wrapper */
+.vmm-tablewrap{
+  width:100%;
+  overflow:auto;
+  border-radius:16px;
+}
+
+/* ✅ Table + FIX text visibility */
+.vmm-table{
+  width:100%;
+  min-width: 980px;            /* desktop columns stay readable */
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  border-collapse:separate;
+  border-spacing:0;
+  color: var(--text);          /* ✅ FIX */
+  box-shadow:0 12px 22px rgba(0,0,0,.10);
+}
+
+/* header */
+.vmm-table thead tr{
+  background:linear-gradient(135deg,var(--blue1),var(--blue2));
+  color:#fff;
+}
+
+.vmm-table th{
+  padding:14px 12px;
+  font-size:13px;
+  font-weight:500;
+  text-align:left;
+  white-space:nowrap;
+}
+
+/* body */
+.vmm-table td{
+  padding:12px;
+  font-size:13px;
+  font-weight:500;
+  color: var(--text);          /* ✅ FIX */
+  border-top:1px solid rgba(15,23,42,.06);
+  vertical-align:top;
+}
+
+.vmm-table tbody tr:hover{
+  background:#f4f8ff;
+}
+
+/* inputs inside table */
+.vmm-table input[type="text"],
+.vmm-table input[type="number"],
+.vmm-table input{
+  width:100%;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#fff;
+  color: var(--text);          /* ✅ FIX */
+  font-weight:500;
+}
+
+.vmm-table input[type="checkbox"]{
+  width:auto;
+  accent-color: var(--btn);
+}
+
+/* bottom button */
+.vmm-bottom{
+  margin-top:16px;
+  display:flex;
+  justify-content:flex-start;
+}
+
+/* ✅ Responsive: buttons stack, table scrolls */
+@media (max-width: 900px){
+  .vmm-root{
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 16px;
+  }
+
+  .vmm-actions{
+    justify-content:stretch;
+  }
+
+  .vmm-root button,
+  .vmm-upload{
+    width:100%;
+    text-align:center;
+    justify-content:center;
+  }
+
+  .vmm-table{
+    min-width: 980px; /* keep horizontal scroll instead of squishing */
+  }
+}
+
+html body .vmm-root,
+html body .vmm-root * {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+html body .vmm-root input,
+html body .vmm-root button,
+html body .vmm-root select,
+html body .vmm-root textarea {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+html body :where(.vmm-root) {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+html body :where(.vmm-root) :where(*, *::before, *::after) {
+  font-family: inherit !important;
+}
+
+html body .vmm-root h2,
+html body .vmm-root table,
+html body .vmm-root th,
+html body .vmm-root td,
+html body .vmm-root button,
+html body .vmm-root label,
+html body .vmm-root input {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+

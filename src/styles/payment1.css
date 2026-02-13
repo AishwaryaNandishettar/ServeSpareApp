@@ -1,121 +1,195 @@
+/* payment1.css */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg1: #a8cbff;
+  --bg2: #eaf3ff;
+
+  --header1: #052370;
+  --header2: #6fa8ff;
+
+  --textBlue: #123373;
+  --border: #e6e6e6;
+
+  --card: #ffffff;
+  --shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
+  --softShadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Page */
 body {
-  font-family: "Poppins", sans-serif;
-  background: #f7f8fc;
   margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #cfe3ff;
 }
 
+/* Main container matches PaymentPage look */
 .payment-container {
-  height: 640px;
   width: 360px;
-  /* max-width: 420px; */
+  height: 640px;
   margin: 10px auto;
-  background: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  padding: 10px;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  border-radius: 6px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
 }
 
-h2 {
+/* Header bar like PaymentPage */
+.payment-container > h2 {
+  margin: 12px;
+  padding: 16px;
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+
+  background: linear-gradient(135deg, var(--header1), var(--header2));
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Scroll area (so page behaves like second image) */
+.payment-container {
+  overflow: hidden;
 }
 
 .section {
-  margin-bottom: 25px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--softShadow);
+
+  margin: 10px 12px;
+  padding: 10px 0;
 }
 
+/* section headings like RECOMMENDED/CARDS/WALLET... */
 .section h3 {
-  color: #555;
-  font-size: 14px;
-  margin-bottom: 10px;
+  margin: 0;
+  padding: 0 16px 8px;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--textBlue);
+  text-transform: uppercase;
 }
 
+/* Row style like PaymentPage payment-option */
 .option {
+  position: relative;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px;
-  background: #f1f1f7;
-  border-radius: 10px;
-  margin-bottom: 8px;
+  gap: 12px;
+
+  padding: 14px 16px;
+  margin: 6px 12px;
+
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+
   cursor: pointer;
-  transition: 0.3s ease;
+  user-select: none;
+
+  font-size: 15px;
+  font-weight: 500;
+  color: #111;
+
+  /* so arrow/plus doesn't overlap */
+  padding-right: 44px;
 }
 
+/* icons inside option */
+.option svg {
+  font-size: 18px;
+  color: var(--textBlue);
+  flex-shrink: 0;
+}
+
+/* images inside option */
 .option img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Default arrow on the right (like PaymentPage) */
+.option::after {
+  content: "›";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #9aa3b2;
+}
+
+/* If option contains a trailing span (+), keep + and remove arrow */
+.option span:last-child {
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+.option:has(span:last-child)::after {
+  content: "";
+}
+
+/* Make the + look clean and aligned */
+.option span:last-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 26px;
   height: 26px;
-  margin-right: 10px;
+  border-radius: 6px;
+  background: #eef4ff;
+  border: 1px solid #d9e6ff;
 }
 
+/* Hover */
 .option:hover {
-  background: #e2e2f1;
+  transform: translateY(-1px);
 }
 
+/* Expandable form area like PaymentPage card-form */
 .details {
-  display: none;
+  /* JSX sets display:flex inline when open — we keep that */
   flex-direction: column;
   gap: 10px;
-  margin-top: 10px;
-  padding: 12px;
-  background: #f9f9ff;
+
+  margin: 10px 12px 12px;
+  padding: 14px 16px;
+
+  background: #fff;
   border-radius: 10px;
+  box-shadow: var(--softShadow);
 }
 
-.details input, .details select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+/* Inputs like PaymentPage */
+.details input,
+.details select {
   width: 100%;
-  outline: none;
-}
-
-.details button {
-  background: #4a6cf7;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.details button:hover {
-  background: #2f4ef0;
-}
-
-/* ===== CARD STYLE (IMAGE MATCH) ===== */
-
-.card-box {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 14px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f6f6fb;
   padding: 12px;
-  border-radius: 12px;
-  font-weight: 500;
-  margin-bottom: 14px;
+  border-radius: 15px;
+  border: 2px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  background: #fff;
 }
 
-.add-text {
-  color: red;
-  font-weight: 600;
-  font-size: 13px;
-}
-
+/* Expiry row */
 .expiry-label {
   font-size: 13px;
   color: #555;
-  margin-top: 5px;
+  margin-top: 2px;
 }
 
 .expiry-row {
@@ -125,15 +199,115 @@ h2 {
 
 .expiry-row select {
   flex: 1;
-  padding: 10px;
   border-radius: 10px;
-  border: 1px solid #ccc;
 }
 
+/* Buttons like PaymentPage */
+.details button,
 .save-btn {
-  margin-top: 12px;
-  background: #3b0078;
+  width: 100%;
   padding: 14px;
-  border-radius: 30px;
-  font-size: 16px;
+  border: none;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+
+  background: #39017a;
+  color: #fff;
+}
+
+/* Card header inside card-box (your existing block) */
+.card-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--softShadow);
+  border: 1px solid #eee;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  background: #f6f6fb;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* "ADD" looks like PaymentPage */
+.add-text {
+  color: #e81919;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+/* Make sections scrollable if many */
+.payment-container .section:nth-child(n + 2) {
+  /* no-op, keeps layout stable */
+}
+
+/* Make the whole settings list scroll (like payment-scroll) */
+.payment-container {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+}
+
+.payment-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* ✅ 1) Push + button more to the right (Add Credit Card / Select Your Bank) */
+.option {
+  padding-right: 12px; /* was 44px, brings + nearer to right edge */
+  gap: 10px;           /* slightly tighter so text looks aligned */
+}
+
+.option span:last-child {
+  margin-left: auto;   /* forces + to extreme right */
+}
+
+/* ✅ 2) Reduce vertical gap between sections */
+.section {
+  margin: 4px 10px;   /* was 10px 12px */
+}
+
+/* ✅ HEADER BAR (same as old .payment-container > h2 styling) */
+.payment-header-bar {
+  margin: 12px;
+  padding: 16px;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+
+  background: linear-gradient(135deg, var(--header1), var(--header2));
+  border-radius: 4px;
+  flex-shrink: 0;
+
+  position: relative; /* needed for back button */
+}
+
+/* keep h2 clean (no extra spacing) */
+.payment-header-bar h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ✅ back arrow (no circle, icon only) */
+.payment-back-btn {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
