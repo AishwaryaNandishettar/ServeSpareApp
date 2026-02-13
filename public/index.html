@@ -13,22 +13,23 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>React App</title>
 
-    <!-- ADD THIS STYLE TO PREVENT BLUE FLASH -->
+    <!-- PREVENT BLUE FLASH ON ALL DEVICES -->
     <style>
-      /* Make initial background match your app's first screen */
-      body {
-        margin: 0;
-        background-color: #f9f9f9; /* change this to your app's initial background */
-      }
+      html, body, #root {
+  height: 100%;
+  background: #f9f9f9;  /* match your app's initial background */
+}
 
-      /* Also apply same background to root container */
-      #root {
-        min-height: 100vh;
-        background-color: #f9f9f9; /* same as body */
+
+      /* Optional: support dark mode if user has prefers-color-scheme */
+      @media (prefers-color-scheme: dark) {
+        body, #root {
+          background-color: #1a1a1a; /* replace with your dark mode background if needed */
+        }
       }
     </style>
-    <!-- END OF STYLE -->
-    
+    <!-- END OF FLASH FIX -->
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
