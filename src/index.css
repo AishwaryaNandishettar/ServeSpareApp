@@ -1,6 +1,5 @@
 
-
-/* ---------------------------------------------------------- */
+  /* ---------------------------------------------------------- */
 /*                     GLOBAL DEFAULT RESET                   */
 /* ---------------------------------------------------------- */
 
@@ -43,10 +42,6 @@ body, html {
 .app-container > * {
   max-width: 100%;
   overflow-x: hidden;
-}
-.app-container {
-  min-height: 100%;
-  background: #f9f9f9; /* same as body and root */
 }
 
 /* Code Tag (your existing styling) */
@@ -119,8 +114,12 @@ code {
 
 html, body, #root {
   height: 100%;
-  background: #ffffff;
+  background: #f9f9f9; /* same as index.html */
 }
+.app-container {
+  background: #f9f9f9; /* ensures inner container matches */
+}
+
 
 .app-container {
   min-height: 100%;
